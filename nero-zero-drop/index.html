@@ -88,6 +88,7 @@ h2{font-size:24px;margin-bottom:2px}
     <div class="small" id="miceTotal"></div>
     <details class="howto"><summary>❓ Comment jouer</summary><div class="rules">
       👆 <b>Glisse ton doigt</b> n'importe où pour bouger Nero.<br>
+      🖱️ Sur ordinateur : <b>bouge la souris</b>, ou <b>ZQSD / flèches</b>. <b>Espace</b> = super pouvoir, <b>P</b> = pause.<br>
       🐭 Attrape les souris, enchaîne pour les <b>combos</b>. La 🟡 dorée vaut gros.<br>
       💧 Une ombre = une goutte qui tombe. Bouge !<br>
       💦 Une bande rouge = le jet du vaporisateur arrive.<br>
@@ -169,7 +170,7 @@ h2{font-size:24px;margin-bottom:2px}
 'use strict';
 /* ---------- langue (FR / EN selon le téléphone) ---------- */
 let LANG=(()=>{try{const v=localStorage.getItem('game_lang');if(v)return JSON.parse(v);}catch(e){}return ((navigator.language||'fr').toLowerCase().startsWith('fr'))?'fr':'en';})();
-const EXACT={'Jouer':'Play','Menu':'Menu','Pause':'Pause','Nero :':'Nero:','combos':'combos'};
+const EXACT={'Jouer':'Play','Menu':'Menu','Pause':'Pause','Nero :':'Nero:','combos':'combos','🖱️ Sur ordinateur :':'🖱️ On computer:','bouge la souris':'move the mouse',', ou':', or','ZQSD / flèches':'WASD / arrows','Espace':'Space','= super pouvoir,':'= super power,','= pause.':'= pause.'};
 const FRAG=[["Attrape les souris. Évite l'eau. Reste sec.","Catch the mice. Dodge the water. Stay dry."],["🎯 Attrape le nombre de souris demandé pour finir le niveau.","🎯 Catch the required number of mice to clear the level."],["👑 Un boss tous les 10 niveaux · 18 mondes · 999 niveaux.","👑 A boss every 10 levels · 18 worlds · 999 levels."],["💦 Une bande rouge = le jet du vaporisateur arrive.","💦 A red band = the spray is coming."],["💧 Une ombre = une goutte qui tombe. Bouge !","💧 A shadow = a falling drop. Move!"],["🐟 +1 vie · 🧶 frénésie de souris · ☂️ parapluie","🐟 +1 life · 🧶 mouse frenzy · ☂️ umbrella"],["🧲 aimant · 🥛 ralenti · 👻 fantôme invincible","🧲 magnet · 🥛 slow-mo · 👻 invincible ghost"],["🐭 Attrape les souris, enchaîne pour les","🐭 Catch the mice, chain them for"],[". La 🟡 dorée vaut gros.",". The golden 🟡 one is worth a lot."],["n'importe où pour bouger Nero.","anywhere to move Nero."],["👆 Glisse ton doigt pour bouger Nero","👆 Slide your finger to move Nero"],["❓ Comment jouer","❓ How to play"],["Revivre : Nero repart avec 2 vies","Revive: Nero comes back with 2 lives"],["Doubler mes souris (+","Double my mice (+"],[" 🐭 pour les costumes)"," 🐭 for outfits)"],[" 🐭 en plus !"," 🐭 extra!"],["😺 Nero est de retour !","😺 Nero is back!"],["Bravo ! Maintenant, évite les ombres 💧","Well done! Now dodge the shadows 💧"],["Attrape-la !","Catch it!"],["Évite l’ombre !","Dodge the shadow!"],["Glisse ton doigt","Slide your finger"],["😼 Remplis la jauge pour le","😼 Fill the gauge for the"],["Miaou sonique","Sonic Meow"],["😼 MIAOU SONIQUE !","😼 SONIC MEOW!"],["📸 Fais une capture et défie tes potes de battre Nero","📸 Take a screenshot and dare your friends to beat Nero"],["Nero a terminé les 999 niveaux. Tu fais partie des légendes.","Nero finished all 999 levels. You are a legend."],["L'Aspirateur Ultime est vaincu !","The Ultimate Vacuum is defeated!"],["Nero est trempé. Il te boude pour la soirée.","Nero is soaked. He's sulking all evening."],["Nero exige des croquettes en dédommagement.","Nero demands kibble as compensation."],["Nero fait sa toilette en attendant.","Nero is grooming himself meanwhile."],["Nero fait semblant que c’était voulu.","Nero pretends he meant to do that."],["Nero part bouder sur le canapé.","Nero goes to sulk on the couch."],["Nero réclame une serviette… et une revanche.","Nero wants a towel… and a rematch."],["Nero te fixe. Il n’oubliera pas.","Nero stares at you. He won't forget."],["Partie enregistrée : tu reprendras au niveau ","Progress saved: you will resume at level "],["Même partie pour tout le monde aujourd’hui","Same game for everyone today"],[" : même partie pour tout le monde",": same game for everyone"],["Défi du ","Challenge of "],["🎁 Coffre récupéré · reviens demain (série : ","🎁 Chest claimed · come back tomorrow (streak: "],["🐭 pour tes costumes ! Série : ","🐭 for your outfits! Streak: "],["Gravité faible : Nero flotte !","Low gravity: Nero floats!"],["👻 Nero fantôme : invincible !","👻 Ghost Nero: invincible!"],["Il s’est cogné ! Griffe-le !","It crashed! Scratch it!"],["Tous les costumes sont débloqués !","All outfits unlocked!"],["Tu as atteint le rang suprême !","You reached the top rank!"],[" souris attrapées au total"," mice caught in total"],[" souris attrapées, combo "," mice caught, combo "],[" souris pour débloquer : "," more mice to unlock: "],[" souris pour débloquer "," more mice to unlock "],[" ! Équipe-le dans le menu.","! Equip it in the menu."],["🎉 Costume débloqué : ","🎉 Outfit unlocked: "],["Aspirateur esquivé ! +30","Vacuum dodged! +30"],["Record du défi du jour !","Daily challenge record!"],["Prochain boss : niveau ","Next boss: level "],["🎁 Coffre du jour · jour ","🎁 Daily chest · day "],[" étoiles · niveau max "," stars · max level "],["🗺️ Carte des niveaux","🗺️ Level map"],["Recommencer au niveau 1","Restart from level 1"],["Atteins le niveau ","Reach level "],[" pour devenir "," to become "],["Aucun dégât reçu !","No damage taken!"],["Chien semé ! +40","Dog shaken off! +40"],["Explorateur des mondes 🌍","World Explorer 🌍"],["Frénésie ! Points x2","Frenzy! Points x2"],["⚠️ L’aspirateur arrive !","⚠️ The vacuum is coming!"],["🐕 Le chien du voisin !","🐕 The neighbour's dog!"],["🐰 Le Lapin Gardien passe !","🐰 The Bunny Guardian drops by!"],["🐱 Nero : Zéro Goutte","🐱 Nero: Zero Drop"],["NERO : ZÉRO GOUTTE","NERO: ZERO DROP"],["Nero : Zéro Goutte","Nero: Zero Drop"],["Zéro Goutte","Zero Drop"],["Continuer · Niveau ","Continue · Level "],["Niveau suivant ▶","Next level ▶"],["Attention, ça glisse !","Careful, it's slippery!"],["⚠️ Le boss arrive…","⚠️ The boss is coming…"],["👑 Le repaire de l’Aspirateur Ultime","👑 The Ultimate Vacuum's lair"],["👑 ASPIRATEUR ULTIME","👑 ULTIMATE VACUUM"],["👑 ROI ASPIRATEUR","👑 VACUUM KING"],["👑 MÉGA-ASPIRATEUR","👑 MEGA VACUUM"],["👑 Boss vaincu ! ","👑 Boss defeated! "],["🧲 Aimant à souris !","🧲 Mouse magnet!"],["🌧️ Le jardin sous la pluie","🌧️ The rainy garden"],["🌼 La prairie venteuse","🌼 The windy meadow"],["🍭 Le pays des bonbons","🍭 Candy land"],["🏙️ La ville la nuit","🏙️ The city at night"],["🛁 La salle de bain","🛁 The bathroom"],["❄️ La banquise (ça glisse !)","❄️ The ice floe (slippery!)"],["🌙 La Lune (gravité faible)","🌙 The Moon (low gravity)"],["Chasseur de canapé 🛋️","Couch Hunter 🛋️"],["Terreur des souris 🐭","Mouse Terror 🐭"],["Ninja des gouttes 🥷","Drop Ninja 🥷"],["Chaton mouillé 💧","Wet Kitten 💧"],["Roi du salon 👑","Living Room King 👑"],["Légende Nero 🐾","Nero Legend 🐾"],["Nero Éternel 🌟","Eternal Nero 🌟"],["Nouveau record !","New record!"],["Nero est trempé !","Nero is soaked!"],["Niveau réussi !","Level cleared!"],["Copier mon score","Copy my score"],["Costume de Nero","Nero's outfit"],["Quitter la partie","Quit game"],["Sélectionne le texte","Select the text"],["Tempête de sable !","Sandstorm!"],["Pluie de noix !","Coconut rain!"],["Jet de lave !","Lava jet!"],["Jet de soda !","Soda jet!"],["Protégé ! ☂️","Protected! ☂️"],["Parapluie ! ☂️","Umbrella! ☂️"],["✈️ Turbulences !","✈️ Turbulence!"],["💨 Coup de vent →","💨 Gust of wind →"],["← Coup de vent 💨","← Gust of wind 💨"],["🥛 Ralenti !","🥛 Slow-mo!"],["Griffe ! 🐾 +","Scratch! 🐾 +"],["Esquive ! +10","Dodged! +10"],["Ouf ! +5","Phew! +5"],["Niveau max : ","Max level: "],["🛋️ Le salon","🛋️ The living room"],["🍳 La cuisine","🍳 The kitchen"],["🌾 Les champs","🌾 The fields"],["🏖️ La plage","🏖️ The beach"],["🌴 La jungle","🌴 The jungle"],["🏜️ Le désert","🏜️ The desert"],["✈️ L’aéroport","✈️ The airport"],["🛩️ Dans l’avion","🛩️ On the plane"],["⚡ L’orage","⚡ The storm"],["🌋 Le magma","🌋 The magma"],["🔊 Son activé","🔊 Sound on"],["🔇 Son coupé","🔇 Sound off"],["🎁 Coffre du jour","🎁 Daily chest"],[" · +1 vie 🐾"," · +1 life 🐾"],["+1 vie 🐟","+1 life 🐟"],[". Tu fais mieux ? 💧",". Can you beat it? 💧"],[" · Défi du jour"," · Daily challenge"],["Défi du jour.","Daily challenge."],["Défi du jour","Daily challenge"],[" réussi !"," cleared!"],["Voir la carte","See the map"],["Nœud pap","Bow tie"],["Couronne","Crown"],["Nature","Natural"],["Cape","Cape"],["Reprendre","Resume"],["Rejouer","Play again"],["Retour","Back"],["Copié ✔","Copied ✔"],["Touché ","Hit "],[" fois"," times"],[" esquives"," dodges"],["🔥 combo ","🔥 combo "],[" souris"," mice"],["Combo x","Combo x"],["Pschhht !","Pschhht!"],["Plouf !","Splash!"],["Blizzard !","Blizzard!"],["Bonk !","Bonk!"],["Boum !","Boom!"],["Brûlé !","Burnt!"],["Collant !","Sticky!"],["Ensablé !","Sanded!"],["Gelé !","Frozen!"],["Zap !","Zap!"],["Éclair !","Lightning!"],["Aspiré !","Sucked up!"],["Ouaf !","Woof!"],["Ça brûle !","It burns!"],["Encore ","Need "],["👑 BOSS · ","👑 BOSS · "],["Niveau ","Level "],["Niv. ","Lv. "],[" !","!"],[" ?","?"],[" : ",": "]].sort((a,b)=>b[0].length-a[0].length);
 const trCache=new Map();
 function tr(s){
@@ -193,7 +194,7 @@ function setLang(l){LANG=l;try{localStorage.setItem('game_lang',JSON.stringify(l
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 const EMOJI='"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
-let W=0,H=0,S=1,DPR=1;
+let W=0,H=0,S=1,DPR=1,AF=1;
 
 /* ---------- utilitaires ---------- */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
@@ -435,7 +436,7 @@ const MUSIC={timer:null,step:0,
 document.addEventListener('pointerdown',()=>MUSIC.start());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)MUSIC.stop();});
 /* ---------- colonne de jeu sur ordinateur ---------- */
-function gameWidth(){return Math.min(window.innerWidth,Math.max(420,Math.round(window.innerHeight*.62)));}
+function gameWidth(){const iw=window.innerWidth,ih=window.innerHeight;if(iw>=760&&iw>ih*1.15)return Math.min(iw,Math.round(ih*1.78));return Math.min(iw,Math.max(420,Math.round(ih*.62)));}
 function placeColumn(){const w=gameWidth(),l=Math.round((window.innerWidth-w)/2);cv.style.width=w+'px';cv.style.left=l+'px';const h=$('hud');h.style.left=l+'px';h.style.right='auto';h.style.width=w+'px';}
 
 let floorCv=document.createElement('canvas'),floorRoom=-1;
@@ -492,7 +493,7 @@ function nextRank(s){for(const k of RANKS)if(s<k[0])return k;return null;}
 function resize(){
   DPR=Math.min(2,window.devicePixelRatio||1);W=gameWidth();H=window.innerHeight;
   cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);placeColumn();
-  S=clamp(Math.min(W,H)/400,.8,1.3);
+  S=clamp(Math.min(W,H)/400,.8,W>H*1.15?1.55:1.3);AF=clamp(W/Math.max(420,H*.62),1,2.6);
   buildFloor(G?G.room:0);
   if(G){G.N.x=clamp(G.N.x,0,W);G.N.y=clamp(G.N.y,0,H);G.N.tx=clamp(G.N.tx,0,W);G.N.ty=clamp(G.N.ty,0,H);}
 }
@@ -617,10 +618,10 @@ function update(dt){
 
   // apparitions
   const bm=G.bossLvl?1.7:1;
-  G.mouseT-=dt;if(G.mouseT<=0){spawnMouse();if(G.tut===0){const mm=G.mice[G.mice.length-1];mm.vx*=.5;}G.mouseT=rm.mice/Math.sqrt(Math.min(d,3))*(G.frenzy>0?.3:1)*R(.6,1.4);}
+  G.mouseT-=dt;if(G.mouseT<=0){spawnMouse();if(G.tut===0){const mm=G.mice[G.mice.length-1];mm.vx*=.5;}G.mouseT=rm.mice/Math.sqrt(Math.min(d,3))*(G.frenzy>0?.3:1)*R(.6,1.4)/Math.sqrt(AF);}
   if(G.tut===1){G.tutT-=dt;if(G.tutT<=0){G.tut=2;store.set('nero_tut_done',true);}}
-  if(G.lvT>2&&G.tut!==0){G.dropT-=dt*ts;if(G.dropT<=0){spawnDrop();if(G.level>15&&rnd()<Math.min(.5,G.level/200))spawnDrop();if(G.level>80&&rnd()<Math.min(.45,G.level/600))spawnDrop();G.dropT=rm.drop/d*bm*R(.6,1.3);}}
-  if(G.lvT>4&&G.tut===2||G.lvT>4&&G.tut===-1){G.sprayT-=dt*ts;if(G.sprayT<=0){spawnSpray();if(G.level>30&&rnd()<Math.min(.45,G.level/400))spawnSpray();G.sprayT=rm.spray/Math.sqrt(d)*bm*R(.8,1.3);}}
+  if(G.lvT>2&&G.tut!==0){G.dropT-=dt*ts;if(G.dropT<=0){spawnDrop();if(G.level>15&&rnd()<Math.min(.5,G.level/200))spawnDrop();if(G.level>80&&rnd()<Math.min(.45,G.level/600))spawnDrop();G.dropT=rm.drop/d*bm*R(.6,1.3)/AF;}}
+  if(G.lvT>4&&G.tut===2||G.lvT>4&&G.tut===-1){G.sprayT-=dt*ts;if(G.sprayT<=0){spawnSpray();if(G.level>30&&rnd()<Math.min(.45,G.level/400))spawnSpray();G.sprayT=rm.spray/Math.sqrt(d)*bm*R(.8,1.3)/Math.sqrt(AF);}}
   G.itemT-=dt;if(G.itemT<=0){spawnItem();G.itemT=R(11,16);}
   if(G.comboT>0){G.comboT-=dt;if(G.comboT<=0)G.combo=0;}
 
@@ -894,7 +895,7 @@ function draw(){
   if(G.banner.t>0){ctx.globalAlpha=Math.min(1,G.banner.t*1.5);outlineText(G.banner.txt,W/2,H*.3,30*S,'#fff',6);ctx.globalAlpha=1;}
   if(G.tut===0&&G.mice.length){let m0=null,bd=1e9;for(const m of G.mice){if(m.x<0||m.x>W)continue;const d=Math.hypot(m.x-N.x,m.y-N.y);if(d<bd){bd=d;m0=m;}}if(m0){const b=Math.abs(Math.sin(t*5))*10*S;emoji('👆',m0.x+8*S,m0.y+34*S+b,32*S);outlineText('Attrape-la !',m0.x,m0.y-34*S,17*S,'#ffd23f',4);}}
   if(G.tut===1&&G.drops[0]){const d0=G.drops[0];outlineText('Évite l\u2019ombre !',d0.x,d0.y-34*S,17*S,'#9fd8ff',4);}
-  if(G.hint>0){ctx.globalAlpha=Math.min(1,G.hint);const msg=tr('👆 Glisse ton doigt pour bouger Nero');ctx.font='800 '+Math.round(15*S)+'px system-ui,sans-serif';
+  if(G.hint>0){ctx.globalAlpha=Math.min(1,G.hint);const msg=FINE?(LANG==='fr'?'🖱️ Bouge la souris (ou ZQSD / flèches) pour guider Nero':'🖱️ Move the mouse (or WASD / arrows) to guide Nero'):tr('👆 Glisse ton doigt pour bouger Nero');ctx.font='800 '+Math.round(15*S)+'px system-ui,sans-serif';
     const w=Math.min(W-24,ctx.measureText(msg).width+30),y=N.y+80*S;ctx.fillStyle='rgba(0,0,0,.5)';ctx.beginPath();ctx.roundRect?ctx.roundRect(W/2-w/2,y-18*S,w,36*S,18*S):ctx.rect(W/2-w/2,y-18*S,w,36*S);ctx.fill();
     ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(msg,W/2,y,W-40);ctx.globalAlpha=1;}
   ctx.restore();
@@ -925,6 +926,24 @@ cv.addEventListener('pointermove',e=>{
   G.N.ty=clamp(drag.ny+(e.clientY-drag.sy)*1.25,105,H-44*S);
 });
 const endDrag=e=>{if(drag&&e.pointerId===drag.id)drag=null;};
+/* souris (ordinateur) : Nero suit le curseur, sans clic */
+window.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G||G.state!=='play'||G.paused)return;const r=cv.getBoundingClientRect();
+  G.N.tx=clamp(e.clientX-r.left,26*S,W-26*S);G.N.ty=clamp(e.clientY-r.top,105,H-44*S);});
+/* clavier : flèches, ZQSD ou WASD ; Espace = super ; P = pause */
+const KEYS=new Set();
+window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();
+  if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();
+  if(k===' '){const sb=$('superBtn');if(sb&&sb.style.display==='block')sb.click();return;}
+  if(k==='p'){if(!G)return;if(G.paused){const rb=$('resumeBtn');rb&&rb.click();}else if(G.state==='play'){const pb=$('pauseBtn');pb&&pb.click();}return;}
+  KEYS.add(k);});
+window.addEventListener('keyup',e=>KEYS.delete(e.key.toLowerCase()));
+window.addEventListener('blur',()=>KEYS.clear());
+function keyMove(dt){if(!KEYS.size||!G||G.state!=='play'||G.paused)return;let dx=0,dy=0;
+  if(KEYS.has('arrowleft')||KEYS.has('q')||KEYS.has('a'))dx--;if(KEYS.has('arrowright')||KEYS.has('d'))dx++;
+  if(KEYS.has('arrowup')||KEYS.has('z')||KEYS.has('w'))dy--;if(KEYS.has('arrowdown')||KEYS.has('s'))dy++;
+  if(!dx&&!dy)return;const l=Math.hypot(dx,dy),sp=560*S*dt;const N=G.N;
+  N.tx=clamp(clamp(N.tx+dx/l*sp,N.x-40*S,N.x+40*S),26*S,W-26*S);N.ty=clamp(clamp(N.ty+dy/l*sp,N.y-40*S,N.y+40*S),105,H-44*S);}
+const FINE=(()=>{try{return matchMedia('(pointer:fine)').matches}catch(e){return false}})();
 cv.addEventListener('pointerup',endDrag);cv.addEventListener('pointercancel',endDrag);
 
 /* ---------- écrans ---------- */
@@ -996,7 +1015,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
 let HS=0,LF=0;const REDUCE=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}})();function hitStop(s){if(HS<=0)HS=s;}function flashAt(v){const n=performance.now();if(n-LF>340){G.flash=v;LF=n;}}
 (function(){var b=document.getElementById('saveTabBtn');if(!b||!window.__SAVEFIX||!__SAVEFIX.show)return;b.style.display='';b.textContent=(LANG==='fr'?'📌 Joue en plein écran pour garder ta progression':'📌 Play full screen to keep your progress');b.addEventListener('click',function(e){e.stopPropagation();__SAVEFIX.open();});})();
 let last=performance.now();
-function loop(now){let dt=Math.min(.05,(now-last)/1000);last=now;if(HS>0){HS-=dt;dt*=.06;}update(dt);draw();hud();
+function loop(now){let dt=Math.min(.05,(now-last)/1000);last=now;if(HS>0){HS-=dt;dt*=.06;}keyMove(dt);update(dt);draw();hud();
   if(!G){const pc=$('menuPortrait').getContext('2d');pc.clearRect(0,0,180,170);drawNero(pc,90,92,46,{dir:1,look:Math.sin(now/700),costume});}
   requestAnimationFrame(loop);}
 resize();refreshMenu();document.documentElement.lang=LANG;trAll();document.title=LANG==='fr'?'Nero : Zéro Goutte':'Nero: Zero Drop';
