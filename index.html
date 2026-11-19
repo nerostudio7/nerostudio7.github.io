@@ -65,7 +65,7 @@ footer a{color:#c25a10}
 <p class="note" data-en="💾 Your progress is saved on this device. No download, no account." data-fr="💾 Ta progression est sauvegardée sur cet appareil. Sans téléchargement, sans compte.">💾 Your progress is saved on this device. No download, no account.</p>
 <footer>
   <span data-en="Also on" data-fr="Aussi sur">Also on</span> <a href="https://nerostudio.itch.io" rel="noopener">itch.io</a> · TikTok @nerostudio7<br>
-  <span data-en="These games collect no personal data." data-fr="Ces jeux ne collectent aucune donnée personnelle.">These games collect no personal data.</span><br>
+  <span data-en="Anonymous visit stats only, no cookies, no personal data." data-fr="Statistiques de visite anonymes, sans cookies ni données personnelles.">Anonymous visit stats only, no cookies, no personal data.</span><br>
   © 2026 Nero Studio
 </footer>
 <script>
@@ -74,5 +74,6 @@ function apply(){document.documentElement.lang=fr?'fr':'en';document.querySelect
 document.querySelectorAll('#lang button').forEach(function(b){b.classList.toggle('on',(b.getAttribute('data-l')==='fr')===fr);});}
 document.querySelectorAll('#lang button').forEach(function(b){b.addEventListener('click',function(){fr=b.getAttribute('data-l')==='fr';try{localStorage.setItem('game_lang',JSON.stringify(fr?'fr':'en'));}catch(e){}apply();});});apply();})();
 </script>
+<script data-goatcounter="https://nerostudio7.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
